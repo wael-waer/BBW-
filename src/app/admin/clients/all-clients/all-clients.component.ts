@@ -57,7 +57,7 @@ export class AllclientComponent
   displayedColumns = [
     'select',
     'img',
-    'name',
+    'candidateName',
     'mobile',
     'email',
     'company_name',
@@ -246,7 +246,7 @@ export class AllclientComponent
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
       this.dataSource.filteredData.map((x) => ({
-        Name: x.name,
+        Name: x.candidateName,
         Mobile: x.mobile,
         Email: x.email,
         'Company Name': x.company_name,
@@ -306,7 +306,7 @@ export class ExampleDataSource extends DataSource<Clients> {
           .slice()
           .filter((clients: Clients) => {
             const searchStr = (
-              clients.name +
+              clients.candidateName +
               clients.mobile +
               clients.email +
               clients.company_name +
@@ -343,7 +343,7 @@ export class ExampleDataSource extends DataSource<Clients> {
           [propertyA, propertyB] = [a.id, b.id];
           break;
         case 'name':
-          [propertyA, propertyB] = [a.name, b.name];
+          [propertyA, propertyB] = [a.candidateName, b.candidateName];
           break;
         case 'email':
           [propertyA, propertyB] = [a.email, b.email];

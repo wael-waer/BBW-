@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { ContactsComponent } from \"./contacts.component\";\nimport { Page404Component } from \"app/authentication/page404/page404.component\";\nexport const CONTACT_ROUTE = [{\n  path: \"\",\n  component: ContactsComponent\n}, {\n  path: '**',\n  component: Page404Component\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

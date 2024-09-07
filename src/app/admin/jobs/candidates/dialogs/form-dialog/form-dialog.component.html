@@ -47,16 +47,16 @@
             <!-- Champ caché pour stocker le chemin du fichier sélectionné -->
             <input  type="file" (change)="onFileSelected($event)" accept=".pdf" style="display: none" #fileInput>
             <!-- Utilisation de formControlName pour un champ caché -->
-            <input matInput  formControlName="cv" [value]="cvFile ? cvFile.name : ''" readonly>
+            <input matInput  formControlName="cvFilePath" [value]="cvFile ? cvFile.name : ''" readonly>
             <mat-icon class="material-icons-outlined color-icon p-3" matSuffix (click)="fileInput.click()">description</mat-icon>
-            <mat-error *ngIf="contactForm.get('cv')?.invalid && contactForm.get('cv')?.touched">CV is required</mat-error>
+            <mat-error *ngIf="contactForm.get('cvFilePath')?.invalid && contactForm.get('cvFilePath')?.touched">CV is required</mat-error>
           </mat-form-field>
         </div>
         
         <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
           <mat-form-field>
             <mat-label>Job</mat-label>
-            <mat-select formControlName="jobId">
+            <mat-select formControlName="_id">
               <mat-option *ngFor="let job of jobs" [value]="job._id">{{ job.title }}</mat-option>
             </mat-select>
             <mat-error *ngIf="contactForm.get('jobId')?.hasError('required')">Job is required</mat-error>

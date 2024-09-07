@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { candadComponent } from \"./candad.component\";\nimport { Page404Component } from \"app/authentication/page404/page404.component\";\nexport const CANDAD_ROUTE = [{\n  path: \"\",\n  component: candadComponent\n}, {\n  path: \"**\",\n  component: Page404Component\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

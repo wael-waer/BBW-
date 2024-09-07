@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var Role;\n(function (Role) {\n  Role[\"All\"] = \"All\";\n  Role[\"Admin\"] = \"Admin\";\n  Role[\"Employee\"] = \"Employee\";\n  Role[\"Client\"] = \"Client\";\n})(Role || (Role = {}));","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

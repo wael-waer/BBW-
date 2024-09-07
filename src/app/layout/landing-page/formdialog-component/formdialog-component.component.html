@@ -71,9 +71,10 @@
            
           <mat-form-field>
               <mat-label>Job</mat-label>
-              <mat-select formControlName="jobId">
-                <mat-option *ngFor="let job of jobs" [value]="job._id">{{ job.title }}</mat-option>
-              </mat-select>
+              <!-- <mat-select formControlName="jobId">
+                <mat-label [value]="job._id">{{ job.title }}</mat-label>
+              </mat-select> -->
+              <input matInput [value]="jobTitle" disabled> 
               <mat-error *ngIf="contactForm.get('jobId')?.hasError('required')">Job is required</mat-error>
             </mat-form-field>
             

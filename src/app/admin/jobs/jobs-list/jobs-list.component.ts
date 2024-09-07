@@ -84,9 +84,9 @@ export class JobsListComponent
     'contractType',
     'salary',
     'applicationDeadline',
-    'publicationDate',
+    
     'status',
-    'recruitingManager',
+    
     'applicants',
    
     'actions'
@@ -112,6 +112,7 @@ export class JobsListComponent
     
   ) {
     super();
+    
   }
   @ViewChild(MatPaginator, { static: true }) paginator!: MatPaginator;
   @ViewChild(MatSort, { static: true }) sort!: MatSort;
@@ -122,6 +123,7 @@ export class JobsListComponent
   contextMenuPosition = { x: '0px', y: '0px' };
   ngOnInit() {
     this.loadData();
+    
   }
   refresh() {
     this.loadData();
@@ -159,6 +161,7 @@ export class JobsListComponent
   }
   editCall(row: JobsList) {
     this.id = row._id;
+    console.log('Opening edit dialog for ID:', this.id);
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
       tempDirection = 'rtl';
@@ -208,7 +211,11 @@ export class JobsListComponent
       // data: { jobId: this.jobsList?._id },
       height: '280px',
       width: '380px',
-      data: { jobId: row._id },
+      data: { id: row._id,
+        title: row.title,
+        status: row.status,
+        description: row.description,
+        jobId: row._id },
       direction: tempDirection,
     });
     this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
@@ -291,18 +298,7 @@ export class JobsListComponent
     this.dialog.closeAll();
   }
   
-  addSkill(): void {
-    this.jobsListService.addSkill(this.newSkill)
-      .subscribe((addedSkill: Skill) => {
-        console.log('Skill added:', addedSkill);
-        alert('skill added');
-        // Vous pouvez effectuer d'autres actions ici après l'ajout réussi
-        this.newSkill = {  name: '' }; // Réinitialiser le nouveau skill
-      }, (error) => {
-        console.error('Error adding skill:', error);
-        // Gérer l'erreur ici
-      });
-  }
+  
   // export table data in excel file
   exportExcel() {
     // key name with space add in brackets
@@ -310,14 +306,13 @@ export class JobsListComponent
       this.dataSource.filteredData.map((x) => ({
         Title: x.title,
         Description: x.description,
-        requiredSkills: x.requiredSkills.join(', '), // Convertit le tableau de compétences en une chaîne séparée par des virgules
+        requiredSkills: x.requiredSkills, // Convertit le tableau de compétences en une chaîne séparée par des virgules
         Location: x.location,
         contractType: x.contractType,
         salary: x.salary,
         applicationDeadline: formatDate(x.applicationDeadline, 'yyyy-MM-dd', 'en'),
         status: x.status,
-        publicationDate: formatDate(x.publicationDate, 'yyyy-MM-dd', 'en'),
-        recruitingManager: x.recruitingManager,
+        
         
 
       }));
@@ -390,7 +385,7 @@ export class ExampleDataSource extends DataSource<JobsList> {
               jobsList.description +
               jobsList.requiredSkills +
               jobsList.status +
-              jobsList.applicants.join(', ')
+              jobsList.applicants
              
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
@@ -446,12 +441,7 @@ export class ExampleDataSource extends DataSource<JobsList> {
               case 'status':
                 [propertyA, propertyB] = [a.status, b.status];
                 break;
-                case 'publicationDate':
-              [propertyA, propertyB] = [a.publicationDate, b.publicationDate];
-              break;
-              case 'recruitingManager':
-                [propertyA, propertyB] = [a.recruitingManager, b.recruitingManager];
-                break;
+                
                 case 'applicants':
                   [propertyA, propertyB] = [a.applicants, b.applicants];
                   break;

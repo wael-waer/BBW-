@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { TaskComponent } from \"./task.component\";\nimport { Page404Component } from \"app/authentication/page404/page404.component\";\nexport const TASK_ROUTE = [{\n  path: \"\",\n  component: TaskComponent\n}, {\n  path: '**',\n  component: Page404Component\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

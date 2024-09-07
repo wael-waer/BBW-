@@ -8,7 +8,8 @@ import { UnsubscribeOnDestroyAdapter } from '@shared';
   providedIn: 'root',
 })
 export class CandidatesService extends UnsubscribeOnDestroyAdapter {
-  private readonly API_URL = 'http://localhost:3000/application';
+  private readonly API_URL = 'http://localhost:8086/api/applications/apply/{{_id}}';
+  private apiUrl = 'http://localhost:8086/api';;
   downloadExcelUrl = `${this.API_URL}/download`;
   isTblLoading = true;
   dataChange: BehaviorSubject<Candidates[]> = new BehaviorSubject<Candidates[]>(
@@ -24,6 +25,14 @@ export class CandidatesService extends UnsubscribeOnDestroyAdapter {
     return this.httpClient.get(this.downloadExcelUrl, {
       responseType: 'blob'
     });
+  }
+  applyyforjob(formData: FormData, jobId: string): Observable<any> {
+    if (!jobId) {
+      throw new Error('Job ID is missing');
+    }
+    const url = `${this.apiUrl}/applications/apply/${jobId}`;  // Assurez-vous que jobId est correctement inséré dans l'URL
+    console.log(`POST Request URL: ${url}`);  // Debug: Vérifiez l'URL construite
+    return this.httpClient.post<any>(url, formData);
   }
   getcandidates(): Observable<string[]> {
     return this.httpClient.get<string[]>(this.API_URL);
@@ -95,7 +104,7 @@ updateCandidate(id: string, updateCandidateDto: any): Observable<any> {
     //     });
   }
   deleteCandidates(id: number): void {
-    console.log(id);
+    console.log(id); 
     // this.httpClient.delete(this.API_URL + id)
     //     .subscribe({
     //       next: (data) => {

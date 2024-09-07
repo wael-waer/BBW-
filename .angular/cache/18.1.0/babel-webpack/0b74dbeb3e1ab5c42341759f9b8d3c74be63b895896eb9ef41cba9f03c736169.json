@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { CalendarComponent } from \"./calendar.component\";\nimport { Page404Component } from \"app/authentication/page404/page404.component\";\nexport const CALENDAR_ROUTE = [{\n  path: \"\",\n  component: CalendarComponent\n}, {\n  path: '**',\n  component: Page404Component\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

@@ -1,0 +1,1 @@
+{"ast":null,"code":"// job.model.ts\nexport class JobsList {}\nexport class Skill {\n  constructor() {\n    this.name = '';\n  }\n}","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

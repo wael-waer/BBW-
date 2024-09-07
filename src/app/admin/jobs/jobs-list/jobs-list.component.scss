@@ -39,7 +39,8 @@ white-space: pre-wrap; /* Permettre au texte de s'étendre sur plusieurs lignes 
 word-wrap: break-word; /* Forcer les mots longs à se casser */
 }
 .mat-cell {
-    min-width: 100px; /* Définir une largeur minimale pour les cellules */
+    min-width: 200px;
+    height: 60px; /* Définir une largeur minimale pour les cellules */
     overflow: hidden;
     text-overflow: ellipsis; /* Tronquer le texte avec des points de suspension s'il est trop long */
     // white-space: nowrap;

@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { GoogleComponent } from \"./google/google.component\";\nimport { Page404Component } from \"app/authentication/page404/page404.component\";\nexport const MAPS_ROUTE = [{\n  path: \"google\",\n  component: GoogleComponent\n}, {\n  path: '**',\n  component: Page404Component\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

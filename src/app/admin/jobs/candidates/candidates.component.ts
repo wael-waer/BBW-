@@ -329,11 +329,11 @@ export class CandidatesComponent
     // key name with space add in brackets
     const exportData: Partial<TableElement>[] =
       this.dataSource.filteredData.map((x) => ({
-        Name: x.jobId,
+        Name: x._id,
         Email: x.candidateName,
         Mobile: x.email,
         // cv: x.cv,
-        cv: this.extractFileName(x.cv),
+        cv: this.extractFileName(x.cvFilePath),
        
       }));
 
@@ -412,10 +412,10 @@ export class ExampleDataSource extends DataSource<Candidates> {
           .slice()
           .filter((candidates: Candidates) => {
             const searchStr = (
-              candidates.jobId +
+              candidates._id +
               candidates.candidateName +
               candidates.email +
-              candidates.cv
+              candidates.cvFilePath
               
               
             
@@ -423,8 +423,8 @@ export class ExampleDataSource extends DataSource<Candidates> {
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
           this.filteredData.forEach(candidate => {
-            if (!candidate.cv.startsWith('http://localhost:3000/files/uploads')) {
-              candidate.cv = `http://localhost:3000/files/${candidate.cv}`;
+            if (!candidate.cvFilePath.startsWith('http://localhost:8086/files/uploads')) {
+              candidate.cvFilePath = `http://localhost:8086/files/${candidate.cvFilePath}`;
             }
           });
          
@@ -456,7 +456,7 @@ export class ExampleDataSource extends DataSource<Candidates> {
           [propertyA, propertyB] = [a._id, b._id];
           break;
         case 'job':
-          [propertyA, propertyB] = [a.jobId, b.jobId];
+          [propertyA, propertyB] = [a._id, b._id];
           break;
         case 'candidatename':
           [propertyA, propertyB] = [a.candidateName, b.candidateName];

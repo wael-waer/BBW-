@@ -8,8 +8,10 @@ import { UnsubscribeOnDestroyAdapter } from '@shared';
   providedIn: 'root',
 })
 export class JobsListService extends UnsubscribeOnDestroyAdapter {
-  private readonly API_URL = 'http://localhost:3000/job';
-  private readonly APII_URL = 'http://localhost:3000/skill';
+  private readonly API_URL = 'http://localhost:8086/job/addjob';
+  private readonly OPI_UrRL = 'http://localhost:8086/job/Delete';
+  private readonly APII='http://localhost:8086/job/getalljobs';
+  private readonly URL ='http://localhost:8086/job';
   isTblLoading = true;
   dataChange: BehaviorSubject<JobsList[]> = new BehaviorSubject<JobsList[]>([]);
   // Temporarily stores data from dialogs
@@ -20,27 +22,30 @@ export class JobsListService extends UnsubscribeOnDestroyAdapter {
   get data(): JobsList[] {
     return this.dataChange.value;
   }
+  addJob(job: JobsList): Observable<JobsList> {
+    return this.httpClient.post<JobsList>(this.API_URL, job);
+  }
   getJobs(): Observable<string[]> {
-    return this.httpClient.get<string[]>(this.API_URL);
+    return this.httpClient.get<string[]>(this.APII);
   }
   deleteJob(jobId: string): Observable<any> {
-    const url = `${this.API_URL}/${jobId}`;
+    const url = `${this.OPI_UrRL}/${jobId}`;
     return this.httpClient.delete(url);
   }
-  getOpenJobs(): Observable<string[]> {
-    return this.httpClient.get<JobsList[]>(this.API_URL).pipe(
-      map((jobs: JobsList[]) => jobs.filter(job => job.status === 'Open').map(job => job.title))
-    );
-  }
+  // getOpenJobs(): Observable<string[]> {
+  //   return this.httpClient.get<JobsList[]>(this.API_URL).pipe(
+  //     map((jobs: JobsList[]) => jobs.filter(job => job.status === 'Open').map(job => job.title))
+  //   );
+  // }
   getJobTitleById(jobId: string): Observable<string> {
     return this.httpClient.get<string>(`${this.API_URL}/${jobId}/title`);
   }
-  getDialogData() {
+  getDialogData():any {
     return this.dialogData;
   }
   /** CRUD METHODS */
   getAllJobsLists(): void {
-    this.subs.sink = this.httpClient.get<JobsList[]>(this.API_URL).subscribe({
+    this.subs.sink = this.httpClient.get<JobsList[]>(this.APII).subscribe({
       next: (data) => {
         this.isTblLoading = false;
         this.dataChange.next(data);
@@ -51,16 +56,12 @@ export class JobsListService extends UnsubscribeOnDestroyAdapter {
       },
     });
   }
-  getSkills(): Observable<Skill[]> {
-    return this.httpClient.get<Skill[]>(`${this.APII_URL}`);
-  }
+  
   updateJob(job: JobsList): Observable<JobsList> {
-    const url = `${this.API_URL}/${job._id}`; // Utilisez l'ID du job pour construire l'URL de mise à jour
+    const url = `${this.URL}/${job._id}`; // Utilisez l'ID du job pour construire l'URL de mise à jour
     return this.httpClient.put<JobsList>(url, job);
   }
-  addSkill(skill: Skill): Observable<Skill> {
-    return this.httpClient.post<Skill>(this.APII_URL, skill);
-  }
+  
 
   addJobsList(jobsList: JobsList): void {
     this.dialogData = jobsList;
@@ -75,9 +76,7 @@ export class JobsListService extends UnsubscribeOnDestroyAdapter {
     //     },
     //   });
   }
-  addJob(job: JobsList): Observable<JobsList> {
-    return this.httpClient.post<JobsList>(this.API_URL, job);
-  }
+  
   updateJobsList(jobsList: JobsList): void {
     this.dialogData = jobsList;
 

@@ -46,7 +46,7 @@
                     </mat-dialog-content>
                     <mat-dialog-actions>
                       <button mat-button (click)="closeAddSkillDialog()">Cancel</button>
-                      <button mat-button (click)="addSkill()">Add</button>
+                      
                     </mat-dialog-actions>
                   </ng-template>
                   <li class="tbl-header-btn">
@@ -120,7 +120,7 @@
                     <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
                       <div class="tag-container">
 
-                      <span class="tag" *ngIf="row.requiredSkills"> <span class="mobile-label">Required Skills:</span> {{ row.requiredSkills.join(', ') }}</span>
+                      <span class="tag" *ngIf="row.requiredSkills"> <span class="mobile-label">Required Skills:</span> {{ row.requiredSkills}}</span>
                       </div>
                     </mat-cell>
                   </ng-container>
@@ -156,45 +156,6 @@
                     </mat-cell>
                   </ng-container>
                 
-                  <!-- <ng-container matColumnDef="status">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
-                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                      <span class="truncate-text"> <span class="mobile-label">Status:</span> {{ row.status }}</span>
-                      @if (row.status==='Open') {
-                        <div>
-                          <span class="badge badge-pill badge-primary col-green">
-                          {{row.status}}</span>
-                        </div>
-                      }
-                      @if (row.status==='Closed') {
-                        <div>
-                          <span class="badge badge-pill badge-primary col-red">
-                          {{row.status}}</span>
-                        </div>
-                      }
-                      @if (row.status==='Cancelled') {
-                        <div>
-                          <span class="badge badge-pill badge-primary col-black">
-                          {{row.status}}</span>
-                        </div>
-                      }
-                    </mat-cell>
-                  </ng-container> -->
-                  <!-- <ng-container matColumnDef="status">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Status</mat-header-cell>
-                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                      <span class="truncate-text"> <span class="mobile-label">Status:</span> {{ row.status }}</span>
-                      <ng-container *ngIf="row.status==='Open'">
-                        <span class="badge badge-pill badge-primary col-green">{{ row.status }}</span>
-                      </ng-container>
-                      <ng-container *ngIf="row.status==='Closed'">
-                        <span class="badge badge-pill badge-primary col-red">{{ row.status }}</span>
-                      </ng-container>
-                      <ng-container *ngIf="row.status==='Cancelled'">
-                        <span class="badge badge-pill badge-primary col-black">{{ row.status }}</span>
-                      </ng-container>
-                    </mat-cell>
-                  </ng-container> -->
                   <ng-container matColumnDef="status">
                     <mat-header-cell *matHeaderCellDef mat-sort-header> Status
                     </mat-header-cell>
@@ -231,12 +192,7 @@
                     </mat-cell>
                   </ng-container>
                 
-                  <ng-container matColumnDef="recruitingManager">
-                    <mat-header-cell *matHeaderCellDef mat-sort-header>Recruiting Manager</mat-header-cell>
-                    <mat-cell *matCellDef="let row" (contextmenu)="onContextMenu($event, row)">
-                      <span class="truncate-text"> <span class="mobile-label">Recruiting Manager:</span> {{ row.recruitingManager }}</span>
-                    </mat-cell>
-                  </ng-container>
+                
                   <ng-container matColumnDef="applicants">
                     <mat-header-cell *matHeaderCellDef mat-sort-header>Applicants</mat-header-cell>
                     <mat-cell *matCellDef="let row" (click)="$event.stopPropagation();">

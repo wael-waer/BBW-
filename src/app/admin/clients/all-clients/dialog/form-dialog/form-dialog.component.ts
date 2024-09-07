@@ -43,7 +43,7 @@ export class FormDialogComponent {
     // Set the defaults
     this.action = data.action;
     if (this.action === 'edit') {
-      this.dialogTitle = data.clients.name;
+      this.dialogTitle = data.clients.candidateName;
       this.clients = data.clients;
     } else {
       this.dialogTitle = 'New Client';
@@ -67,7 +67,7 @@ export class FormDialogComponent {
     return this.fb.group({
       id: [this.clients.id],
       img: [this.clients.img],
-      name: [this.clients.name],
+      Candidate: [this.clients.candidateName],
       email: [this.clients.email],
       mobile: [this.clients.mobile],
       company_name: [this.clients.company_name],

@@ -2,6 +2,7 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialogTitle, MatDialogContent, MatDia
 import { Component, Inject } from '@angular/core';
 import { JobsListService } from '../../jobs-list.service';
 import { MatButtonModule } from '@angular/material/button';
+import Swal from 'sweetalert2';
 
 export interface DialogData {
   id: number;
@@ -39,17 +40,40 @@ export class DeleteDialogComponent {
   // confirmDelete(): void {
   //   this.jobsListService.deleteJobsList(this.data.id);
   // }
-  onDeleteJob(jobId: string): void {
-    this.jobsListService.deleteJob(jobId).subscribe(
-      () => {
-        // Gérer la suppression réussie
-        console.log('Job deleted successfully');
-        // Rafraîchir la liste des jobs si nécessaire
-      },
-      (error) => {
-        // Gérer les erreurs de suppression
-        console.error('Error deleting job:', error);
+  onDeleteJob(): void {
+    // Affiche un SweetAlert2 pour confirmation
+    Swal.fire({
+      title: 'Are you sure?',
+      text: `Do you want to delete the job titled "${this.data.title}"?`,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Appelle le service pour supprimer le job
+        this.jobsListService.deleteJob(this.data.jobId).subscribe(
+          () => {
+            Swal.fire(
+              'Deleted!',
+              'The job has been deleted.',
+              'success'
+            ).then(() => {
+              this.dialogRef.close(1);  // Ferme le dialogue et renvoie 1 comme résultat
+            });
+          },
+          (error) => {
+            Swal.fire(
+              'Error!',
+              'An error occurred while deleting the job.',
+              'error'
+            );
+            console.error('Error deleting job:', error);
+          }
+        );
       }
-    );
+    });
   }
+
 }

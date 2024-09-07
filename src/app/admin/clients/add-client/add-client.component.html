@@ -17,8 +17,8 @@
                 <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-3">
                   <mat-form-field class="example-full-width mb-3" appearance="outline">
                     <mat-label>Name</mat-label>
-                    <input matInput formControlName="name" required>
-                      @if (clientForm.get('name')?.hasError('required')) {
+                    <input matInput formControlName="candidateName" required>
+                      @if (clientForm.get('candidateName')?.hasError('required')) {
                         <mat-error>
                           Name is required
                         </mat-error>

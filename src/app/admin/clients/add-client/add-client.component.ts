@@ -38,7 +38,7 @@ export class AddClientComponent {
   agree3 = false;
   constructor(private fb: UntypedFormBuilder) {
     this.clientForm = this.fb.group({
-      name: ['', [Validators.required]],
+      candidateName: ['', [Validators.required]],
       mobile: ['', [Validators.required]],
       email: [
         '',

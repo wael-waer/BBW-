@@ -1,0 +1,1 @@
+{"ast":null,"code":"import { LeadsComponent } from \"./leads.component\";\nimport { Page404Component } from \"app/authentication/page404/page404.component\";\nexport const LEADS_ROUTE = [{\n  path: \"\",\n  component: LeadsComponent\n}, {\n  path: \"**\",\n  component: Page404Component\n}];","map":null,"metadata":{},"sourceType":"module","externalDependencies":[]}

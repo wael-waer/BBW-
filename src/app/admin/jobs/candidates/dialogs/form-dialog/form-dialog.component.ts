@@ -103,8 +103,8 @@ export class FormDialogComponent implements OnInit {
   }
   createContactForm(): UntypedFormGroup {
     // const fileName = this.candidates.cv.split('/').pop();
-    const fileName = this.candidates.cv ? this.candidates.cv.split('/').pop() : null;
-    const jobTitle = this.jobs.find(job => job._id === this.candidates.jobId)?.title || null;
+    const fileName = this.candidates.cvFilePath ? this.candidates.cvFilePath.split('/').pop() : null;
+    const jobTitle = this.jobs.find(job => job._id === this.candidates._id)?.title || null;
     return this.fb.group({
       // id: [this.candidates._id],
       // img: [this.candidates.jobId],
@@ -117,13 +117,13 @@ export class FormDialogComponent implements OnInit {
      
     // });
     
-      id: [this.candidates._id],
+      id: [this.candidates.idApp],
       candidateName: [this.candidates.candidateName],
       
       email: [this.candidates.email],
-      jobId: [this.candidates.jobId],
+      _id: [this.candidates._id],
       // cv: [this.candidates.cv],
-      cv: [fileName],
+      cvFilePath: [fileName],
       jobTitle: [jobTitle],
       
      
@@ -131,13 +131,13 @@ export class FormDialogComponent implements OnInit {
   }
   getCvPath(): string {
     // Vérifiez si le candidat a un CV et retournez le chemin approprié
-    return this.candidates.cv ? `file:///${this.candidates.cv}` : ''; // Modifiez ceci pour ajuster le format du chemin si nécessaire
+    return this.candidates.cvFilePath ? `file:///${this.candidates.cvFilePath}` : ''; // Modifiez ceci pour ajuster le format du chemin si nécessaire
   }
  
   onFileSelected(event: any) {
     this.cvFile = event.target.files[0] as File;
     // Utilisez 'controls' pour accéder aux contrôles du formulaire
-    this.contactForm.controls['cv'].setValue(this.cvFile ? this.cvFile.name : '');
+    this.contactForm.controls['cvFilePath'].setValue(this.cvFile ? this.cvFile.name : '');
   }
   // getJobs(): void {
   //   this.jobService.getJobs().subscribe(
@@ -200,8 +200,8 @@ export class FormDialogComponent implements OnInit {
       const formData = new FormData();
       formData.append('candidateName', this.contactForm.get('candidateName')!.value);
       formData.append('email', this.contactForm.get('email')!.value);
-      formData.append('jobId', this.contactForm.get('jobId')!.value);
-      formData.append('cv', this.cvFile);
+      formData.append('_id', this.contactForm.get('_id')!.value);
+      formData.append('cvFile', this.cvFile);
   
       if (this.action === 'edit') {
         // Modification
